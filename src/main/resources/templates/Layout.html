@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:fragment="head">
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" th:href="@{/imagenes/icono.png}" sizes="16x16"/>
     <link th:href="@{/styles/bootstrap/bootstrap.css}" rel="stylesheet">
     <script th:src="@{/scripts/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
     <title>Ropa Store</title>
@@ -10,7 +11,10 @@
 <nav th:fragment="menu" class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #9ac1d0;">
     <div class="container-fluid">
         <div>
-            <img src="imagenes/logo.png" class="logo">
+            <a class="navbar-brand" th:href="@{/home}"><img th:src="@{imagenes/logo.png}" class="logo" style="width:100px;height:80px;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
