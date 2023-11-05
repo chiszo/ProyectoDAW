@@ -4,5 +4,45 @@
 </head>
 <body>
 <nav th:replace="~{layout::menu}"></nav>
+<div class="card">
+    <div class="card-header">
+        Listado de productos
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-info">
+            <i class="bi bi-balloon"> Agregar</i>
+        </button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">ID Cargo</th>
+                <th scope="col">ID Area</th>
+                <th scope="col">Clave</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="trabajador: ${listadotrabajadores}">
+                <td th:text="${trabajador.idtrabajador}"></td>
+                <td th:text="${trabajador.nombres}"></td>
+                <td th:text="${trabajador.apellidos}"></td>
+                <td th:text="${trabajador.dni}"></td>
+                <td th:text="${trabajador.telefono}"></td>
+                <td th:text="${trabajador.correo}"></td>
+                <td th:text="${trabajador.direccion}"></td>
+                <td th:text="${trabajador.idcargo}"></td>
+                <td th:text="${trabajador.idarea}"></td>
+                <td th:text="${trabajador.clave}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

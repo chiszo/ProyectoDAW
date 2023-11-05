@@ -4,5 +4,39 @@
 </head>
 <body>
 <nav th:replace="~{layout::menu}"></nav>
+<div class="card">
+    <div class="card-header">
+        Listado de proveedor
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-info">
+            <i class="bi bi-balloon"> Agregar</i>
+        </button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">RUC</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Representante</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="proveedor: ${listadoproveedores}">
+                <td th:text="${proveedor.idproveedor}"></td>
+                <td th:text="${proveedor.telefono}"></td>
+                <td th:text="${proveedor.direccion}"></td>
+                <td th:text="${proveedor.empresa}"></td>
+                <td th:text="${proveedor.ruc}"></td>
+                <td th:text="${proveedor.correo}"></td>
+                <td th:text="${proveedor.representante}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
