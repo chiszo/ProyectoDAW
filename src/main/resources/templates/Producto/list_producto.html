@@ -4,5 +4,45 @@
 </head>
 <body>
 <nav th:replace="~{layout::menu}"></nav>
+<div class="card">
+    <div class="card-header">
+        Listado de productos
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-info">
+            <i class="bi bi-balloon"> Agregar</i>
+        </button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ID Tipo producto</th>
+                <th scope="col">ID Proveedor</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock mínimo</th>
+                <th scope="col">Stock máximo</th>
+                <th scope="col">ID lote</th>
+                <th scope="col">estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto: ${listadoproductos}">
+                <td th:text="${producto.idproducto}"></td>
+                <td th:text="${producto.idtipopro}"></td>
+                <td th:text="${producto.idproveedor}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.cantidad}"></td>
+                <td th:text="${producto.precio}"></td>
+                <td th:text="${producto.cantmin}"></td>
+                <td th:text="${producto.cantmax}"></td>
+                <td th:text="${producto.idlote}"></td>
+                <td th:text="${producto.estado}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
