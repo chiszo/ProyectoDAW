@@ -1,12 +1,13 @@
-package cibertec.edu.pe.ProyectoDAW.Model;
+package cibertec.edu.pe.ProyectoDAW.Model.bd;
 import jakarta.persistence.*;
 import lombok.Data;
+
 @Entity
-@Table(name="lote")
+@Table(name="tipobaja")
 @Data
-public class Lote {
+public class TipoBaja {
     @Id
-    private String idlote;
+    private String idtipobaja;
     @Column(name ="descripcion")
     private String descripcion;
 }

@@ -3,16 +3,17 @@
 <head th:replace="~{layout::head}">
 </head>
 <body>
+<script type="text/javascript" th:src="@{/scripts/web/Producto/list_producto.js}"></script>
 <nav th:replace="~{layout::menu}"></nav>
 <div class="card">
     <div class="card-header">
         Listado de productos
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-info">
+        <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon"> Agregar</i>
         </button>
-        <table class="table">
+        <table id="tblproducto" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -25,6 +26,8 @@
                 <th scope="col">Stock máximo</th>
                 <th scope="col">ID lote</th>
                 <th scope="col">estado</th>
+                <th>Actualizar</th>
+                <th>Eliminar</th>
             </tr>
             </thead>
             <tbody>
@@ -39,9 +42,88 @@
                 <td th:text="${producto.cantmax}"></td>
                 <td th:text="${producto.idlote}"></td>
                 <td th:text="${producto.estado}"></td>
+                <td>
+                    <button type="button" class="btn btn-outline-info btnactualizar"
+                            th:data-idproducto="${producto.idproducto}"
+                            th:data-idtipopro="${producto.idtipopro}"
+                            th:data-idproveedor="${producto.idproveedor}"
+                            th:data-nombre="${producto.nombre}"
+                            th:data-cantidad="${producto.cantidad}"
+                            th:data-precio="${producto.precio}"
+                            th:data-cantmin="${producto.cantmin}"
+                            th:data-cantmax="${producto.cantmax}"
+                            th:data-idlote="${producto.idlote}"
+                            th:data-estado="${producto.estado}"
+                            >
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-warning btneliminar"
+                            th:data-idproducto="${producto.idproducto}"
+                            th:data-idtipopro="${producto.idtipopro}"
+                            th:data-idproveedor="${producto.idproveedor}"
+                            th:data-nombre="${producto.nombre}"
+                            th:data-cantidad="${producto.cantidad}"
+                            th:data-precio="${producto.precio}"
+                            th:data-cantmin="${producto.cantmin}"
+                            th:data-cantmax="${producto.cantmax}"
+                            th:data-idlote="${producto.idlote}"
+                            th:data-estado="${producto.estado}"
+                            >
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Mantenimiento Producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="txtidproducto" class="form-label">ID Producto:</label>
+                <input type="text" class="form-control" id="txtidproducto" placeholder="Ingrese el ID del producto">
+
+                <label for="txtidtipoproducto" class="form-label">ID tipo de producto</label>
+                <input type="text" class="form-control" id="txtidtipoproducto" placeholder="Ingrese el tipo de producto">
+
+                <label for="txtidproveedor" class="form-label">ID Proveedor:</label>
+                <input type="text" class="form-control" id="txtidproveedor" placeholder="Ingrese el proveedor">
+
+                <label for="txtnombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese el nombre del producto">
+
+                <label for="txtcantidad" class="form-label">Cantidad:</label>
+                <input type="text" class="form-control" id="txtcantidad" placeholder="Ingrese la cantidad">
+
+                <label for="txtprecio" class="form-label">Precio:</label>
+                <input type="text" class="form-control" id="txtprecio" placeholder="Ingrese el precio">
+
+                <label for="txtstockmin" class="form-label">Stock mínimo:</label>
+                <input type="text" class="form-control" id="txtstockmin" placeholder="Ingrese el stock mínimo">
+
+                <label for="txtstockmax" class="form-label">Stock máximo</label>
+                <input type="text" class="form-control" id="txtstockmax" placeholder="Ingrese el stock máximo">
+
+                <label for="txtidlote" class="form-label">ID Lote:</label>
+                <input type="text" class="form-control" id="txtidlote" placeholder="Ingrese el lote">
+
+                <label for="txtestado" class="form-label">Estado:</label>
+                <input type="text" class="form-control" id="txtestado" placeholder="Ingrese el estado del producto">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                <button id="btnguardar" onclick="click" type="button" class="btn btn-outline-secondary"><i class="bi bi-download"></i></button>
+            </div>
+        </div>
     </div>
 </div>
 </body>

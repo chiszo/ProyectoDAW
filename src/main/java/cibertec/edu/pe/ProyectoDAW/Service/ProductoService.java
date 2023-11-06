@@ -1,6 +1,6 @@
 package cibertec.edu.pe.ProyectoDAW.Service;
 
-import cibertec.edu.pe.ProyectoDAW.Model.Producto;
+import cibertec.edu.pe.ProyectoDAW.Model.bd.Producto;
 import cibertec.edu.pe.ProyectoDAW.Repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
