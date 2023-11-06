@@ -1,6 +1,7 @@
 package cibertec.edu.pe.ProyectoDAW.Service;
 
 import cibertec.edu.pe.ProyectoDAW.Model.bd.Producto;
+import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,30 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
-    public boolean registrarProducto(Producto producto){
-        return productoRepository.save(producto) !=null;
+    public ResultadoResponse registrarProducto(Producto producto){
+
+        String mensaje = "Producto registrado";
+        Boolean respuesta = true;
+
+        try {
+            productoRepository.save(producto);
+        }catch (Exception ex){
+            mensaje= "Producto NO registrado";
+            respuesta = false;
+        }
+
+        return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 
-    public void eliminarProducto(String idproducto){
-        productoRepository.deleteById(idproducto);
+    public ResultadoResponse eliminarProducto(String idproducto){
+        String mensaje = "Producto eliminado";
+        Boolean respuesta = true;
+        try {
+            productoRepository.deleteById(idproducto);
+        }catch (Exception ex){
+            mensaje= "Producto NO eliminado";
+            respuesta = false;
+        }
+        return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 }
