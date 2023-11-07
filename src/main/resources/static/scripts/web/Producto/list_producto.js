@@ -1,6 +1,5 @@
 /*NUEVO PRODUCTO*/
 $(document).on("click","#btnnuevo",function(){
-    //alert("Hola :D");
     $("#modalproducto").modal("show");
 
     $("#txtidproducto").val("");
@@ -36,7 +35,6 @@ $(document).on("click",".btnactualizar",function(){
 });
 
 /*BOTÓN GUARDAR - PARA REGISTRAR Y ACTUALIZAR PRODUCTOS*/
-
 $(document).on("click","#btnguardar",function(){
     $.ajax({
         type:"POST",
@@ -64,6 +62,7 @@ $(document).on("click","#btnguardar",function(){
     });
 });
 
+/*Listado de productos - actualizado*/
 function listarProductos(){
     $.ajax({
         type:"GET",

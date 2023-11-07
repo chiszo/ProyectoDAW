@@ -1,6 +1,7 @@
 package cibertec.edu.pe.ProyectoDAW.Service;
 
 import cibertec.edu.pe.ProyectoDAW.Model.bd.Proveedor;
+import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Repository.ProveedorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,29 @@ public class ProveedorService {
         return proveedorRepository.findAll();
     }
 
-    public boolean registrarProveedor(Proveedor proveedor){
-        return proveedorRepository.save(proveedor) !=null;
+    public ResultadoResponse registrarProveedor(Proveedor proveedor){
+        String mensaje = "Proveedor registrado";
+        Boolean respuesta = true;
+
+        try {
+            proveedorRepository.save(proveedor);
+        }catch (Exception ex){
+            mensaje= "Proveedor NO registrado";
+            respuesta = false;
+        }
+        return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 
-    public void eliminarProveedor(String idproveedor){
-        proveedorRepository.deleteById(idproveedor);
+    public ResultadoResponse eliminarProveedor(String idproveedor){
+
+        String mensaje = "Proveedor eliminado";
+        Boolean respuesta = true;
+        try {
+            proveedorRepository.deleteById(idproveedor);
+        }catch (Exception ex){
+            mensaje= "Proveedor NO eliminado";
+            respuesta = false;
+        }
+        return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 }
