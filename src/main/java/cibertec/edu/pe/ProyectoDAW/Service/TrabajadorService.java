@@ -1,6 +1,7 @@
 package cibertec.edu.pe.ProyectoDAW.Service;
 
 import cibertec.edu.pe.ProyectoDAW.Model.bd.Trabajador;
+import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Repository.TrabajadorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,28 @@ public class TrabajadorService {
         return trabajadorRepository.findAll();
     }
 
-    public boolean registrarTrabajador(Trabajador trabajador){
-        return trabajadorRepository.save(trabajador) !=null;
+    public ResultadoResponse registrarTrabajador(Trabajador trabajador){
+        String mensaje = "Trabajador registrado";
+        Boolean respuesta = true;
+
+        try {
+            trabajadorRepository.save(trabajador);
+        }catch (Exception ex){
+            mensaje= "Trabajador NO registrado";
+            respuesta = false;
+        }
+        return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 
-    public void eliminarTrabajador(String idtrabajador){
-        trabajadorRepository.deleteById(idtrabajador);
+    public ResultadoResponse eliminarTrabajador(String idtrabajador){
+        String mensaje = "Trabajador eliminado";
+        Boolean respuesta = true;
+        try {
+            trabajadorRepository.deleteById(idtrabajador);
+        }catch (Exception ex){
+            mensaje= "Trabajador NO eliminado";
+            respuesta = false;
+        }
+        return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 }
