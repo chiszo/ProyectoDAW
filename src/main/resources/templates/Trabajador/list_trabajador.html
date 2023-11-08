@@ -3,16 +3,17 @@
 <head th:replace="~{layout::head}">
 </head>
 <body>
+<script type="text/javascript" th:src="@{/scripts/web/Trabajador/list_trabajador.js}"></script>
 <nav th:replace="~{layout::menu}"></nav>
 <div class="card">
     <div class="card-header">
-        Listado de productos
+        Listado de trabajadores
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-info">
+        <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon"> Agregar</i>
         </button>
-        <table class="table">
+        <table id="tbltrabajador" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -25,6 +26,8 @@
                 <th scope="col">ID Cargo</th>
                 <th scope="col">ID Area</th>
                 <th scope="col">Clave</th>
+                <th>Actualizar</th>
+                <th>Eliminar</th>
             </tr>
             </thead>
             <tbody>
@@ -39,9 +42,88 @@
                 <td th:text="${trabajador.idcargo}"></td>
                 <td th:text="${trabajador.idarea}"></td>
                 <td th:text="${trabajador.clave}"></td>
+                <td>
+                    <button type="button" class="btn btn-outline-info btnactualizar"
+                            th:data-idtrabajador="${trabajador.idtrabajador}"
+                            th:data-nombres="${trabajador.nombres}"
+                            th:data-apellidos="${trabajador.apellidos}"
+                            th:data-dni="${trabajador.dni}"
+                            th:data-telefono="${trabajador.telefono}"
+                            th:data-correo="${trabajador.correo}"
+                            th:data-direccion="${trabajador.direccion}"
+                            th:data-idcargo="${trabajador.idcargo}"
+                            th:data-idarea="${trabajador.idarea}"
+                            th:data-clave="${trabajador.clave}"
+                    >
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-warning btneliminar"
+                            th:data-idtrabajador="${trabajador.idtrabajador}"
+                            th:data-nombres="${trabajador.nombres}"
+                            th:data-apellidos="${trabajador.apellidos}"
+                            th:data-dni="${trabajador.dni}"
+                            th:data-telefono="${trabajador.telefono}"
+                            th:data-correo="${trabajador.correo}"
+                            th:data-direccion="${trabajador.direccion}"
+                            th:data-idcargo="${trabajador.idcargo}"
+                            th:data-idarea="${trabajador.idarea}"
+                            th:data-clave="${trabajador.clave}"
+                    >
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modaltrabajador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Mantenimiento Trabajador</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="txtidtrabajador" class="form-label">ID Trabajador:</label>
+                <input type="text" class="form-control" id="txtidtrabajador" placeholder="Ingrese el ID del trabajador">
+
+                <label for="txtnombres" class="form-label">Nombres:</label>
+                <input type="text" class="form-control" id="txtnombres" placeholder="Ingrese el nombre">
+
+                <label for="txtapellidos" class="form-label">Apellidos:</label>
+                <input type="text" class="form-control" id="txtapellidos" placeholder="Ingrese los apellidos">
+
+                <label for="txtdni" class="form-label">DNI:</label>
+                <input type="text" class="form-control" id="txtdni" placeholder="Ingrese el DNI">
+
+                <label for="txttelefono" class="form-label">Teléfono:</label>
+                <input type="text" class="form-control" id="txttelefono" placeholder="Ingrese el teléfono">
+
+                <label for="txtcorreo" class="form-label">Correo:</label>
+                <input type="text" class="form-control" id="txtcorreo" placeholder="Ingrese el correo">
+
+                <label for="txtdireccion" class="form-label">Dirección:</label>
+                <input type="text" class="form-control" id="txtdireccion" placeholder="Ingrese la dirección">
+
+                <label for="txtidcargo" class="form-label">ID Cargo:</label>
+                <input type="text" class="form-control" id="txtidcargo" placeholder="Ingrese el cargo">
+
+                <label for="txtidarea" class="form-label">ID Área:</label>
+                <input type="text" class="form-control" id="txtidarea" placeholder="Ingrese el área">
+
+                <label for="txtclave" class="form-label">Clave:</label>
+                <input type="text" class="form-control" id="txtclave" placeholder="Ingrese la clave">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                <button id="btnguardar" onclick="click" type="button" class="btn btn-outline-secondary"><i class="bi bi-download"></i></button>
+            </div>
+        </div>
     </div>
 </div>
 </body>
