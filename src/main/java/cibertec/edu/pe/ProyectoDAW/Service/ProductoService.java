@@ -1,9 +1,6 @@
 package cibertec.edu.pe.ProyectoDAW.Service;
 
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Lote;
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Producto;
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Proveedor;
-import cibertec.edu.pe.ProyectoDAW.Model.bd.TipoProducto;
+import cibertec.edu.pe.ProyectoDAW.Model.bd.*;
 import cibertec.edu.pe.ProyectoDAW.Model.dto.ProductoDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Repository.ProductoRepository;
@@ -55,7 +52,9 @@ public class ProductoService {
             lote.setIdlote(productoDto.getIdlote());
             productonuevo.setLote(lote);
             //estado
-            productonuevo.setEstado(productoDto.getEstado());
+            Estado estado = new Estado();
+            estado.setIdestado(productoDto.getIdestado());
+            productonuevo.setEstado(estado);
             //guardar producto
             productoRepository.save(productonuevo);
         }catch (Exception ex){

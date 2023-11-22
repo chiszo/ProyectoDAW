@@ -41,7 +41,7 @@
                 <td th:text="${producto.cantmin}"></td>
                 <td th:text="${producto.cantmax}"></td>
                 <td th:text="${producto.lote.descripcion}"></td>
-                <td th:text="${producto.estado}"></td>
+                <td th:text="${producto.estado.descripcion}"></td>
                 <td>
                     <button type="button" class="btn btn-outline-info btnactualizar"
                             th:data-idproducto="${producto.idproducto}"
@@ -53,7 +53,7 @@
                             th:data-cantmin="${producto.cantmin}"
                             th:data-cantmax="${producto.cantmax}"
                             th:data-idlote="${producto.lote.idlote}"
-                            th:data-estado="${producto.estado}"
+                            th:data-idestado="${producto.estado.idestado}"
                             >
                         <i class="bi bi-pencil-square"></i>
                     </button>
@@ -69,7 +69,7 @@
                             th:data-cantmin="${producto.cantmin}"
                             th:data-cantmax="${producto.cantmax}"
                             th:data-idlote="${producto.lote.idlote}"
-                            th:data-estado="${producto.estado}"
+                            th:data-idestado="${producto.estado.idestado}"
                             >
                         <i class="bi bi-trash"></i>
                     </button>
@@ -93,12 +93,10 @@
 
                 <label for="txtidtipoproducto" class="form-label">Tipo de producto</label>
                 <select id="txtidtipoproducto" class="form-select" aria-label="Default select example">
-                    <option selected>Selecciona un tipo</option>
                 </select>
 
                 <label for="txtidproveedor" class="form-label">Proveedor:</label>
                 <select id="txtidproveedor" class="form-select" aria-label="Default select example">
-                    <option selected>Selecciona un proveedor</option>
                 </select>
 
                 <label for="txtnombre" class="form-label">Nombre</label>
@@ -118,11 +116,11 @@
 
                 <label for="txtidlote" class="form-label">Lote:</label>
                 <select id="txtidlote" class="form-select" aria-label="Default select example">
-                    <option selected>Selecciona un lote</option>
                 </select>
 
                 <label for="txtestado" class="form-label">Estado</label>
-                <input type="text" class="form-control" id="txtestado" placeholder="Ingrese el estado">
+                <select id="txtestado" class="form-select" aria-label="Default select example">
+                </select>
 
             </div>
             <div class="modal-footer">

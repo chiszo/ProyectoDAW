@@ -37,6 +37,7 @@ public class Producto {
     @JoinColumn(name ="idlote")
     private Lote lote;
 
-    @Column(name ="estado")
-    private Integer estado;
+    @ManyToOne
+    @JoinColumn(name ="idestado")
+    private Estado estado;
 }

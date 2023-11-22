@@ -13,5 +13,5 @@ public class ProductoDto {
     private Integer cantmin;
     private Integer cantmax;
     private String idlote;
-    private Integer estado;
+    private Integer idestado;
 }

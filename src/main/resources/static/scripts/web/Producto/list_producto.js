@@ -8,7 +8,24 @@ $(document).on("click","#btnnuevo",function(){
     $("#txtprecio").val("");
     $("#txtstockmin").val("");
     $("#txtstockmax").val("");
-    $("#txtestado").val("");
+    $("#txtidproveedor").empty();
+    $("#txtestado").empty();
+    $("#txtidlote").empty();
+    $("#txtidtipoproducto").empty();
+    $.ajax({
+            type:"GET",
+            url:"/producto/list_estado",
+            datatype: "json",
+            success: function(resultado){
+                $.each(resultado, function(index,value){
+                    $("#txtestado").append(
+                        `<option value="${value.idestado}">
+                            ${value.descripcion}
+                        </option>`
+                    )
+                });
+            }
+        });
     $.ajax({
         type:"GET",
         url:"/producto/list_tipopro",
@@ -70,13 +87,14 @@ $(document).on("click",".btnactualizar",function(){
         $("#txtprecio").val($(this).attr("data-precio"));
         $("#txtstockmin").val($(this).attr("data-cantmin"));
         $("#txtstockmax").val($(this).attr("data-cantmax"));
-        $("#txtestado").val($(this).attr("data-estado"));
         $("#txtidproveedor").empty();
+        $("#txtestado").empty();
         $("#txtidlote").empty();
         $("#txtidtipoproducto").empty();
         var idlote =$(this).attr("data-idlote");
         var idtipopro=$(this).attr("data-idtipopro");
         var idproveedor=$(this).attr("data-idproveedor");
+        var estado=$(this).attr("data-idestado");
         $.ajax({
             type:"GET",
             url:"/producto/list_tipopro",
@@ -122,6 +140,21 @@ $(document).on("click",".btnactualizar",function(){
                 $("#txtidproveedor").val(idproveedor);
             }
         });
+        $.ajax({
+            type:"GET",
+            url:"/producto/list_estado",
+            datatype: "json",
+            success: function(resultado){
+                $.each(resultado, function(index,value){
+                    $("#txtestado").append(
+                        `<option value="${value.idestado}">
+                            ${value.descripcion}
+                        </option>`
+                    )
+                });
+                $("#txtestado").val(estado);
+            }
+        });
 });
 
 /*BOTÓN GUARDAR - PARA REGISTRAR Y ACTUALIZAR PRODUCTOS*/
@@ -140,7 +173,7 @@ $(document).on("click","#btnguardar",function(){
             cantmin:$("#txtstockmin").val(),
             cantmax:$("#txtstockmax").val(),
             idlote:$("#txtidlote").val(),
-            estado:$("#txtestado").val()
+            idestado:$("#txtestado").val()
         }),
         success: function(resultado){
             if(resultado.respuesta){
@@ -172,7 +205,7 @@ function listarProductos(){
                      "<td>"+ value.cantmin+"</td>"+
                      "<td>"+ value.cantmax+"</td>"+
                      "<td>"+ value.lote.descripcion+"</td>"+
-                     "<td>"+ value.estado+"</td>"+
+                     "<td>"+ value.estado.descripcion+"</td>"+
                      "<td>"+
                          "<button type='button' class='btn btn-outline-info btnactualizar'"+
                             "data-idproducto='"+value.idproducto+"'"+
@@ -184,7 +217,7 @@ function listarProductos(){
                             "data-cantmin='"+value.cantmin+"'"+
                             "data-cantmax='"+value.cantmax+"'"+
                             "data-idlote='"+value.lote.idlote+"'"+
-                            "data-estado='"+value.estado+"'"+
+                            "data-idestado='"+value.estado.idestado+"'"+
                          ">"+
                             "<i class='bi bi-pencil-square'></i>"+
                          "</button>"+
@@ -200,7 +233,7 @@ function listarProductos(){
                             "data-cantmin='"+value.cantmin+"'"+
                             "data-cantmax='"+value.cantmax+"'"+
                             "data-idlote='"+value.lote.idlote+"'"+
-                            "data-estado='"+value.estado+"'"+
+                            "data-idestado='"+value.estado.idestado+"'"+
                          ">"+
                             "<i class='bi bi-trash'></i>"+
                          "</button>"+
@@ -218,7 +251,7 @@ $(document).on("click","#btneliminar",function(){
         contentType:"application/json",
         url:"/producto/eliminar",
         data: JSON.stringify({
-            idestado:$("#hddideliminar").val(),
+            idproducto:$("#hddideliminar").val(),
         }),
         success: function(resultado){
             if(resultado.respuesta){

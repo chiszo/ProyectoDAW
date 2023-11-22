@@ -1,15 +1,9 @@
 package cibertec.edu.pe.ProyectoDAW.Controller.Producto;
 
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Lote;
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Producto;
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Proveedor;
-import cibertec.edu.pe.ProyectoDAW.Model.bd.TipoProducto;
+import cibertec.edu.pe.ProyectoDAW.Model.bd.*;
 import cibertec.edu.pe.ProyectoDAW.Model.dto.ProductoDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
-import cibertec.edu.pe.ProyectoDAW.Service.LoteService;
-import cibertec.edu.pe.ProyectoDAW.Service.ProductoService;
-import cibertec.edu.pe.ProyectoDAW.Service.ProveedorService;
-import cibertec.edu.pe.ProyectoDAW.Service.TipoProductoService;
+import cibertec.edu.pe.ProyectoDAW.Service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +18,8 @@ public class ProductoController {
 
     private ProductoService productoService;
     private LoteService loteService;
-    private ProveedorService proveedorService;
     private TipoProductoService tipoProductoService;
+    private EstadoService estadoService;
 
     @GetMapping("/listado")
     public String listado(Model model){
@@ -63,5 +57,11 @@ public class ProductoController {
     @ResponseBody
     public List<Lote> listarlote(){
         return loteService.listar();
+    }
+
+    @GetMapping("/list_estado")
+    @ResponseBody
+    public List<Estado> listarestado(){
+        return estadoService.listar();
     }
 }
