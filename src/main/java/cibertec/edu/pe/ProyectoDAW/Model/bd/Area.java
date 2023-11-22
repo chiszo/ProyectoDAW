@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Area {
     @Id
-    private String idarea;
+    private String idtipoarea;
     @Column(name ="descripcion")
     private String descripcion;
 }

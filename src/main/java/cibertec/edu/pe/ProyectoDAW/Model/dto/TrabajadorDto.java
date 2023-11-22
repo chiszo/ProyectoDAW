@@ -1,7 +1,9 @@
 package cibertec.edu.pe.ProyectoDAW.Model.dto;
 
 import jakarta.persistence.Column;
+import lombok.Data;
 
+@Data
 public class TrabajadorDto {
     private String idtrabajador;
     private String nombres;

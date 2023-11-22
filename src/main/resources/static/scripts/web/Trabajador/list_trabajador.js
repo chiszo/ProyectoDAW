@@ -9,14 +9,45 @@ $(document).on("click","#btnnuevo",function(){
     $("#txttelefono").val("");
     $("#txtcorreo").val("");
     $("#txtdireccion").val("");
-    $("#txtidcargo").val("");
-    $("#txtidarea").val("");
+    $("#txtidcargo").empty();
+    $("#txtidarea").empty();
     $("#txtclave").val("");
+        $.ajax({
+            type:"GET",
+            url:"/trabajador/list_area",
+            datatype: "json",
+            success: function(resultado){
+                $.each(resultado, function(index,value){
+                    $("#txtidarea").append(
+                        `<option value="${value.idtipoarea}">
+                            ${value.descripcion}
+                        </option>`
+                    )
+                });
+            }
+        });
+        $.ajax({
+            type:"GET",
+            url:"/trabajador/list_cargo",
+            datatype: "json",
+            success: function(resultado){
+                $.each(resultado, function(index,value){
+                    $("#txtidcargo").append(
+                        `<option value="${value.idcargo}">
+                            ${value.descripcion}
+                        </option>`
+                    )
+                });
+            }
+        });
 });
 
 /*ELIMINAR*/
 $(document).on("click",".btneliminar",function(){
-    $("#modaltrabajador").modal("show");
+    $("#lblmensajeeliminar").text("Está seguro de eliminar este trabajador " +
+    $(this).attr("data-nombres") + " "+ $(this).attr("data-apellidos") +"?");
+    $("#hddideliminar").val($(this).attr("data-idtrabajador"));
+    $("#modaleliminar").modal("show");
 });
 
 /*ACTUALIZAR - TRAER LOS DATOS AL MODAL*/
@@ -29,9 +60,41 @@ $(document).on("click",".btnactualizar",function(){
         $("#txttelefono").val($(this).attr("data-telefono"));
         $("#txtcorreo").val($(this).attr("data-correo"));
         $("#txtdireccion").val($(this).attr("data-direccion"));
-        $("#txtidcargo").val($(this).attr("data-idcargo"));
-        $("#txtidarea").val($(this).attr("data-idarea"));
+        $("#txtidcargo").empty();
+        $("#txtidarea").empty();
         $("#txtclave").val($(this).attr("data-clave"));
+        var idarea = $(this).attr("data-idtipoarea");
+        var idcargo = $(this).attr("data-idcargo");
+        $.ajax({
+            type:"GET",
+            url:"/trabajador/list_area",
+            datatype: "json",
+            success: function(resultado){
+                $.each(resultado, function(index,value){
+                    $("#txtidarea").append(
+                        `<option value="${value.idtipoarea}">
+                            ${value.descripcion}
+                        </option>`
+                    )
+                });
+                $("#txtidarea").val(idarea);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            url:"/trabajador/list_cargo",
+            datatype: "json",
+            success: function(resultado){
+                $.each(resultado, function(index,value){
+                    $("#txtidcargo").append(
+                        `<option value="${value.idcargo}">
+                            ${value.descripcion}
+                        </option>`
+                    )
+                });
+                $("#txtidcargo").val(idcargo);
+            }
+        });
 });
 
 /*BOTÓN GUARDAR - PARA REGISTRAR Y ACTUALIZAR TRABAJADOR*/
@@ -80,8 +143,8 @@ function listarTrabajador(){
                     "<td>"+value.telefono+"</td>"+
                     "<td>"+value.correo+"</td>"+
                     "<td>"+value.direccion+"</td>"+
-                    "<td>"+value.idcargo+"</td>"+
-                    "<td>"+value.idarea+"</td>"+
+                    "<td>"+value.cargo.descripcion+"</td>"+
+                    "<td>"+value.area.descripcion+"</td>"+
                     "<td>"+value.clave+"</td>"+
                     "<td>"+
                         "<button type='button' class='btn btn-outline-info btnactualizar'"+
@@ -92,8 +155,8 @@ function listarTrabajador(){
                                 "data-telefono='"+value.telefono+"'"+
                                 "data-correo='"+value.correo+"'"+
                                 "data-direccion='"+value.direccion+"'"+
-                                "data-idcargo='"+value.idcargo+"'"+
-                                "data-idarea='"+value.idarea+"'"+
+                                "data-idcargo='"+value.cargo.idcargo+"'"+
+                                "data-idarea='"+value.area.idarea+"'"+
                                 "data-clave='"+value.clave+"'"+
                         ">"+
                             "<i class='bi bi-pencil-square'></i>"+
@@ -108,8 +171,8 @@ function listarTrabajador(){
                                 "data-telefono='"+value.telefono+"'"+
                                 "data-correo='"+value.correo+"'"+
                                 "data-direccion='"+value.direccion+"'"+
-                                "data-idcargo='"+value.idcargo+"'"+
-                                "data-idarea='"+value.idarea+"'"+
+                                "data-idcargo='"+value.cargo.idcargo+"'"+
+                                "data-idarea='"+value.area.idtipoarea+"'"+
                                 "data-clave='"+value.clave+"'"+
                         ">"+
                             "<i class='bi bi-trash'></i>"+
@@ -121,3 +184,21 @@ function listarTrabajador(){
         }
     });
 }
+
+$(document).on("click","#btneliminar",function(){
+    $.ajax({
+        type:"DELETE",
+        contentType:"application/json",
+        url:"/trabajador/eliminar",
+        data: JSON.stringify({
+            idtrabajador:$("#hddideliminar").val(),
+        }),
+        success: function(resultado){
+            if(resultado.respuesta){
+                listarTrabajador();
+            }
+            alert(resultado.mensaje);
+            $("#modaleliminar").modal("hide")
+        }
+    });
+});

@@ -23,8 +23,8 @@
                 <th scope="col">Telefono</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Direccion</th>
-                <th scope="col">ID Cargo</th>
-                <th scope="col">ID Area</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Area</th>
                 <th scope="col">Clave</th>
                 <th>Actualizar</th>
                 <th>Eliminar</th>
@@ -39,8 +39,8 @@
                 <td th:text="${trabajador.telefono}"></td>
                 <td th:text="${trabajador.correo}"></td>
                 <td th:text="${trabajador.direccion}"></td>
-                <td th:text="${trabajador.idcargo}"></td>
-                <td th:text="${trabajador.idarea}"></td>
+                <td th:text="${trabajador.cargo.descripcion}"></td>
+                <td th:text="${trabajador.area.descripcion}"></td>
                 <td th:text="${trabajador.clave}"></td>
                 <td>
                     <button type="button" class="btn btn-outline-info btnactualizar"
@@ -51,8 +51,8 @@
                             th:data-telefono="${trabajador.telefono}"
                             th:data-correo="${trabajador.correo}"
                             th:data-direccion="${trabajador.direccion}"
-                            th:data-idcargo="${trabajador.idcargo}"
-                            th:data-idarea="${trabajador.idarea}"
+                            th:data-idcargo="${trabajador.cargo.idcargo}"
+                            th:data-idtipoarea="${trabajador.area.idtipoarea}"
                             th:data-clave="${trabajador.clave}"
                     >
                         <i class="bi bi-pencil-square"></i>
@@ -67,8 +67,8 @@
                             th:data-telefono="${trabajador.telefono}"
                             th:data-correo="${trabajador.correo}"
                             th:data-direccion="${trabajador.direccion}"
-                            th:data-idcargo="${trabajador.idcargo}"
-                            th:data-idarea="${trabajador.idarea}"
+                            th:data-idcargo="${trabajador.cargo.idcargo}"
+                            th:data-idtipoarea="${trabajador.area.idtipoarea}"
                             th:data-clave="${trabajador.clave}"
                     >
                         <i class="bi bi-trash"></i>
@@ -109,11 +109,13 @@
                 <label for="txtdireccion" class="form-label">Dirección:</label>
                 <input type="text" class="form-control" id="txtdireccion" placeholder="Ingrese la dirección">
 
-                <label for="txtidcargo" class="form-label">ID Cargo:</label>
-                <input type="text" class="form-control" id="txtidcargo" placeholder="Ingrese el cargo">
+                <label for="txtidcargo" class="form-label">Cargo:</label>
+                <select id="txtidcargo" class="form-select" aria-label="Default select example">
+                </select>
 
-                <label for="txtidarea" class="form-label">ID Área:</label>
-                <input type="text" class="form-control" id="txtidarea" placeholder="Ingrese el área">
+                <label for="txtidarea" class="form-label">Área:</label>
+                <select id="txtidarea" class="form-select" aria-label="Default select example">
+                </select>
 
                 <label for="txtclave" class="form-label">Clave:</label>
                 <input type="text" class="form-control" id="txtclave" placeholder="Ingrese la clave">
@@ -122,6 +124,25 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                 <button id="btnguardar" onclick="click" type="button" class="btn btn-outline-secondary"><i class="bi bi-download"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal ELIMINAR-->
+<div class="modal fade" id="modaleliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Eliminar trabajador</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label id="lblmensajeeliminar"></label>
+                <input type="hidden" value="0" id="hddideliminar">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i> Cerrar</button>
+                <button id="btneliminar" onclick="click" type="button" class="btn btn-primary"><i class="bi bi-save"></i> Eliminar</button>
             </div>
         </div>
     </div>

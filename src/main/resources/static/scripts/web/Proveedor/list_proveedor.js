@@ -13,7 +13,10 @@ $(document).on("click","#btnnuevo",function(){
 
 /*ELIMINAR*/
 $(document).on("click",".btneliminar",function(){
-    $("#modalproveedor").modal("show");
+    $("#lblmensajeeliminar").text("Está seguro de eliminar al proveedor " +
+    $(this).attr("data-empresa") +"?");
+    $("#hddideliminar").val($(this).attr("data-idproveedor"));
+    $("#modaleliminar").modal("show");
 });
 
 /*ACTUALIZAR - TRAER LOS DATOS AL MODAL*/
@@ -25,7 +28,7 @@ $(document).on("click",".btnactualizar",function(){
         $("#txtempresa").val($(this).attr("data-empresa"));
         $("#txtruc").val($(this).attr("data-ruc"));
         $("#txtcorreo").val($(this).attr("data-correo"));
-        $("#txtrepresentante").val($(this).attr("representante"));
+        $("#txtrepresentante").val($(this).attr("data-representante"));
 });
 
 /*BOTÓN GUARDAR - PARA REGISTRAR Y ACTUALIZAR PROVEEDORS*/
@@ -86,7 +89,7 @@ function listarProveedor(){
                     "</td>"+
                     "<td>"+
                         "<button type='button' class='btn btn-outline-warning btneliminar'"+
-                                  "data-idproveedor='"+value.idproveedor+"'"+
+                                 "data-idproveedor='"+value.idproveedor+"'"+
                                  "data-telefono='"+value.telefono+"'"+
                                  "data-direccion='"+value.direccion+"'"+
                                  "data-empresa='"+value.empresa+"'"+
@@ -103,3 +106,20 @@ function listarProveedor(){
         }
     });
 }
+$(document).on("click","#btneliminar",function(){
+    $.ajax({
+        type:"DELETE",
+        contentType:"application/json",
+        url:"/proveedor/eliminar",
+        data: JSON.stringify({
+            idproveedor:$("#hddideliminar").val(),
+        }),
+        success: function(resultado){
+            if(resultado.respuesta){
+                listarProveedor();
+            }
+            alert(resultado.mensaje);
+            $("#modaleliminar").modal("hide")
+        }
+    });
+});

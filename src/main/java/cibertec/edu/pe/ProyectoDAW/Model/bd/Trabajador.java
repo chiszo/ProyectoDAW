@@ -30,11 +30,11 @@ public class Trabajador {
 
     @ManyToOne
     @JoinColumn(name ="idcargo")
-    private String idcargo;
+    private Cargo cargo;
 
     @ManyToOne
     @JoinColumn(name ="idtipoarea")
-    private String idarea;
+    private Area area;
 
     @Column(name ="contraseña")
     private String clave;

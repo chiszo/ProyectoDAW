@@ -1,10 +1,11 @@
 package cibertec.edu.pe.ProyectoDAW.Controller.Trabajador;
 
-import cibertec.edu.pe.ProyectoDAW.Model.bd.Proveedor;
+import cibertec.edu.pe.ProyectoDAW.Model.bd.Area;
+import cibertec.edu.pe.ProyectoDAW.Model.bd.Cargo;
 import cibertec.edu.pe.ProyectoDAW.Model.bd.Trabajador;
+import cibertec.edu.pe.ProyectoDAW.Model.dto.TrabajadorDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
-import cibertec.edu.pe.ProyectoDAW.Service.ProductoService;
-import cibertec.edu.pe.ProyectoDAW.Service.TrabajadorService;
+import cibertec.edu.pe.ProyectoDAW.Service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ import java.util.List;
 public class TrabajadorController {
 
     private TrabajadorService trabajadorService;
+    private CargoService cargoService;
+    private AreaService areaService;
     @GetMapping("/listado")
     public String listado(Model model){
         model.addAttribute("listadotrabajadores", trabajadorService.listarTrabajador());
@@ -26,7 +29,7 @@ public class TrabajadorController {
     @PostMapping("/registrar")
     @ResponseBody
     public ResultadoResponse registrarTrabajador(
-            @RequestBody Trabajador objTrabajador) {
+            @RequestBody TrabajadorDto objTrabajador) {
         return trabajadorService.registrarTrabajador(objTrabajador);
     }
 
@@ -41,5 +44,17 @@ public class TrabajadorController {
     @ResponseBody
     public List<Trabajador> listartrabajador(){
         return trabajadorService.listarTrabajador();
+    }
+
+    @GetMapping("/list_area")
+    @ResponseBody
+    public List<Area> listararea(){
+        return areaService.listar();
+    }
+
+    @GetMapping("/list_cargo")
+    @ResponseBody
+    public List<Cargo> listarcargo(){
+        return cargoService.listar();
     }
 }

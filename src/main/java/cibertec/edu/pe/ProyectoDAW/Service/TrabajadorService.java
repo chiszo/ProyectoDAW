@@ -1,6 +1,9 @@
 package cibertec.edu.pe.ProyectoDAW.Service;
 
+import cibertec.edu.pe.ProyectoDAW.Model.bd.Area;
+import cibertec.edu.pe.ProyectoDAW.Model.bd.Cargo;
 import cibertec.edu.pe.ProyectoDAW.Model.bd.Trabajador;
+import cibertec.edu.pe.ProyectoDAW.Model.dto.TrabajadorDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Repository.TrabajadorRepository;
 import lombok.AllArgsConstructor;
@@ -17,12 +20,41 @@ public class TrabajadorService {
         return trabajadorRepository.findAll();
     }
 
-    public ResultadoResponse registrarTrabajador(Trabajador trabajador){
+    public ResultadoResponse registrarTrabajador(TrabajadorDto trabajadorDto){
         String mensaje = "Trabajador registrado";
         Boolean respuesta = true;
 
         try {
-            trabajadorRepository.save(trabajador);
+            //llamar al trabajador
+            Trabajador trabajadornuevo=new Trabajador();
+
+            //recibir los datos
+            //ID
+            trabajadornuevo.setIdtrabajador(trabajadorDto.getIdtrabajador());
+            //nombres
+            trabajadornuevo.setNombres(trabajadorDto.getNombres());
+            //apellidos
+            trabajadornuevo.setApellidos(trabajadorDto.getApellidos());
+            //dni
+            trabajadornuevo.setDni(trabajadorDto.getDni());
+            //telefono
+            trabajadornuevo.setTelefono(trabajadorDto.getTelefono());
+            //correo
+            trabajadornuevo.setCorreo(trabajadorDto.getCorreo());
+            //direccion
+            trabajadornuevo.setDireccion(trabajadorDto.getDireccion());
+            //cargo
+            Cargo cargo = new Cargo();
+            cargo.setIdcargo(trabajadorDto.getIdcargo());
+            trabajadornuevo.setCargo(cargo);
+            //area
+            Area area = new Area();
+            area.setIdtipoarea(trabajadorDto.getIdarea());
+            trabajadornuevo.setArea(area);
+            //clave
+            trabajadornuevo.setClave(trabajadorDto.getClave());
+
+            trabajadorRepository.save(trabajadornuevo);
         }catch (Exception ex){
             mensaje= "Trabajador NO registrado";
             respuesta = false;
