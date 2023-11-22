@@ -61,7 +61,7 @@ CREATE TABLE DETALLE_COMPRA
 ( 
 	CodCompraPro        char(5)  NOT NULL ,
 	IdProducto           char(4)  NOT NULL ,
-	PrecioCompra         integer  NOT NULL ,
+	PrecioCompra         decimal(10,2) NOT NULL ,
 	Cantidad             smallint  NULL ,
 	Monto                decimal(10,2) NOT NULL 
 );
@@ -176,7 +176,7 @@ CREATE TABLE TRABAJADOR
 	Direccion            varchar(60)  NOT NULL ,
 	IdCargo              varchar(3)  NOT NULL ,
 	IdTipoArea           varchar(3)  NOT NULL ,
-	Contraseña           varchar(20)  NOT NULL 
+	Contraseña           varchar(250)  NOT NULL
 );
 
 
