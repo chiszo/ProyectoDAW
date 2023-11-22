@@ -103,10 +103,18 @@ CREATE TABLE PRODUCTO
 	StockMinimo          smallint  NOT NULL ,
 	StockMaximo          smallint  NOT NULL ,
 	IdLote				varchar(3) NOT NULL,
-	estado               bit  NULL 
+	idestado               integer  NOT NULL
 );
 
+CREATE TABLE ESTADO
+(   idestado INTEGER PRIMARY KEY,
+    descripcion varchar(20)
+);
 
+ALTER TABLE PRODUCTO
+	ADD FOREIGN KEY (idestado) REFERENCES ESTADO(idestado)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
 
 ALTER TABLE PRODUCTO
 	ADD  PRIMARY KEY  CLUSTERED (IdProducto ASC);

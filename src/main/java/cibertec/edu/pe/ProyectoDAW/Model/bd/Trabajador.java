@@ -28,10 +28,12 @@ public class Trabajador {
     @Column(name ="direccion")
     private String direccion;
 
-    @Column(name ="idcargo")
+    @ManyToOne
+    @JoinColumn(name ="idcargo")
     private String idcargo;
 
-    @Column(name ="idtipoarea")
+    @ManyToOne
+    @JoinColumn(name ="idtipoarea")
     private String idarea;
 
     @Column(name ="contraseña")
