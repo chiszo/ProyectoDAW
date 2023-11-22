@@ -10,11 +10,13 @@ public class Producto {
     @Id
     private String idproducto;
 
-    @Column(name ="idtipopro")
-    private String idtipopro;
+    @ManyToOne
+    @JoinColumn(name ="idtipopro")
+    private TipoProducto tipoproducto;
 
-    @Column(name ="idproveedor")
-    private String idproveedor;
+    @ManyToOne
+    @JoinColumn(name ="idproveedor")
+    private Proveedor proveedor;
 
     @Column(name ="nombre")
     private String nombre;
@@ -31,9 +33,10 @@ public class Producto {
     @Column(name ="stockmaximo")
     private Integer cantmax;
 
-    @Column(name ="idlote")
-    private String idlote;
+    @ManyToOne
+    @JoinColumn(name ="idlote")
+    private Lote lote;
 
     @Column(name ="estado")
-    private Byte estado;
+    private Integer estado;
 }
