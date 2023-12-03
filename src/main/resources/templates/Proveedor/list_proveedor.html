@@ -9,6 +9,13 @@
     <div class="card-header">
         Listado de proveedores
     </div>
+    <br>
+    <form class="form-inline" th:action="@{/proveedor/listado}" style="margin:5px;">
+        <div class="form-group col-sm-6 d-flex">
+            <input type="text" class="form-control" name="palabraclave" id="palabraclave" th:value="${palabraclave}" placeholder="Ingrese el dato de algún proveedor">
+            <input type="submit" class="btn btn-info mb-2" value="Buscar">
+        </div>
+    </form>
     <div class="card-body">
         <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon"> Agregar</i>
@@ -77,25 +84,25 @@
             </div>
             <div class="modal-body">
                 <label for="txtidproveedor" class="form-label">ID Proveedor:</label>
-                <input type="text" class="form-control" id="txtidproveedor" placeholder="Ingrese el ID del proveedor">
+                <input type="text" class="form-control" id="txtidproveedor" required placeholder="Ingrese el ID del proveedor">
 
                 <label for="txttelefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" id="txttelefono" placeholder="Ingrese el telefono">
+                <input type="text" class="form-control" id="txttelefono" placeholder="Ingrese el telefono" required>
 
                 <label for="txtdireccion" class="form-label">Direccion:</label>
-                <input type="text" class="form-control" id="txtdireccion" placeholder="Ingrese la dirección">
+                <input type="text" class="form-control" id="txtdireccion" placeholder="Ingrese la dirección" required>
 
                 <label for="txtempresa" class="form-label">Empresa</label>
-                <input type="text" class="form-control" id="txtempresa" placeholder="Ingrese el nombre de la empresa">
+                <input type="text" class="form-control" id="txtempresa" placeholder="Ingrese el nombre de la empresa" required>
 
                 <label for="txtruc" class="form-label">RUC:</label>
-                <input type="text" class="form-control" id="txtruc" placeholder="Ingrese el ruc">
+                <input type="text" class="form-control" id="txtruc" placeholder="Ingrese el ruc" required>
 
                 <label for="txtcorreo" class="form-label">Correo:</label>
-                <input type="text" class="form-control" id="txtcorreo" placeholder="Ingrese el correo">
+                <input type="text" class="form-control" id="txtcorreo" placeholder="Ingrese el correo" required>
 
                 <label for="txtrepresentante" class="form-label">Representante:</label>
-                <input type="text" class="form-control" id="txtrepresentante" placeholder="Ingrese el representante">
+                <input type="text" class="form-control" id="txtrepresentante" placeholder="Ingrese el representante" required>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>

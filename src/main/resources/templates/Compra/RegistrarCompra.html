@@ -5,5 +5,43 @@
 <body>
 <script type="text/javascript" th:src="@{/scripts/web/Compra/registrocompra.js}"></script>
 <nav th:replace="~{layout::menu}"></nav>
+    <div class="d-flex">
+        <div class="col-sm-6">
+            <div class="card">
+                <form action="/producto/buscarproducto">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>
+                            Datos del producto
+                        </label>
+                    </div>
+                    <div class="form-group d-flex" style="margin:5px;">
+                        <div class="col-sm-6 d-flex" style="margin:5px;">
+                            <input type="text" name="idproducto" class="form-control" placeholder="ID Producto">
+                            <input type="submit" name="accion" value="Buscar" class="btn btn-outline-info">
+                        </div>
+                        <div class="col-sm-6" style="margin:5px;">
+                            <input type="text" class="form-control" name="nombre">
+                        </div>
+                    </div>
+                    <div class="form-group d-flex" style="margin:5px;">
+                        <div class="col-sm-6 d-flex" style="margin:2px;">
+                            <input type="text" class="form-control" name="precio" placeholder="S/.0.00">
+                        </div>
+                        <div class="col-sm-3" style="margin:2px;">
+                            <input type="number" class="form-control" name="cantidad">
+                        </div>
+                        <div class="col-sm-3" style="margin:2px;">
+                            <input type="text" class="form-control" name="stock">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="accion" value="Agregar" class="btn btn-outline-info">
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

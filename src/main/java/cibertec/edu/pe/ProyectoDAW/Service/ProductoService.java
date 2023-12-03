@@ -16,6 +16,12 @@ public class ProductoService {
     public List<Producto> listarProductos(){
         return productoRepository.findAll();
     }
+    public List<Producto> listarProductosxNombre(String palabraclave){
+        if (palabraclave!=null){
+           return productoRepository.findAll(palabraclave);
+        }
+        return productoRepository.findAll();
+    }
 
     public ResultadoResponse registrarProducto(ProductoDto productoDto){
 
@@ -75,5 +81,9 @@ public class ProductoService {
             respuesta = false;
         }
         return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
+    }
+
+    public Producto obtener(String id){
+        return  productoRepository.findById(id).get();
     }
 }

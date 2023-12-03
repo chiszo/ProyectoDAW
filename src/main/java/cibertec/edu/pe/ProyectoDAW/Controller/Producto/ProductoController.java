@@ -5,6 +5,7 @@ import cibertec.edu.pe.ProyectoDAW.Model.dto.ProductoDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,10 @@ public class ProductoController {
     private EstadoService estadoService;
 
     @GetMapping("/listado")
-    public String listado(Model model){
-        model.addAttribute("listadoproductos", productoService.listarProductos());
+    public String listado(Model model, @Param("palabraclave") String palabraclave){
+        List<Producto> productoList =  productoService.listarProductosxNombre(palabraclave);
+        model.addAttribute("palabraclave",palabraclave);
+        model.addAttribute("listadoproductos", productoList);
         return "Producto/list_producto";
     }
 

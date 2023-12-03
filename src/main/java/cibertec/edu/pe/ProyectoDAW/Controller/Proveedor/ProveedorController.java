@@ -4,6 +4,7 @@ import cibertec.edu.pe.ProyectoDAW.Model.bd.Proveedor;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
 import cibertec.edu.pe.ProyectoDAW.Service.ProveedorService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,9 @@ public class ProveedorController {
 
     private ProveedorService proveedorService;
     @GetMapping("/listado")
-    public String listado(Model model){
-        model.addAttribute("listadoproveedores", proveedorService.listarProveedor());
+    public String listado(Model model,@Param("palabraclave") String palabraclave){
+        model.addAttribute("listadoproveedores", proveedorService.listarProveedorxNombre(palabraclave));
+        model.addAttribute("palabraclave",palabraclave);
         return "Proveedor/list_proveedor";
     }
 

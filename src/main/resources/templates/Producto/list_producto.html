@@ -9,6 +9,13 @@
     <div class="card-header">
         Listado de productos
     </div>
+    <br>
+    <form class="form-inline" th:action="@{/producto/listado}" style="margin:5px;">
+        <div class="form-group col-sm-6 d-flex">
+            <input type="text" class="form-control" name="palabraclave" id="palabraclave" th:value="${palabraclave}" placeholder="Ingrese el ID o nombre de un producto">
+            <input type="submit" class="btn btn-info mb-2" value="Buscar">
+        </div>
+    </form>
     <div class="card-body">
         <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon"> Agregar</i>
@@ -100,19 +107,19 @@
                 </select>
 
                 <label for="txtnombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese el nombre del producto">
+                <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese el nombre del producto" required>
 
                 <label for="txtcantidad" class="form-label">Cantidad:</label>
-                <input type="text" class="form-control" id="txtcantidad" placeholder="Ingrese la cantidad">
+                <input type="text" class="form-control" id="txtcantidad" placeholder="Ingrese la cantidad" required>
 
                 <label for="txtprecio" class="form-label">Precio:</label>
-                <input type="text" class="form-control" id="txtprecio" placeholder="Ingrese el precio">
+                <input type="text" class="form-control" id="txtprecio" placeholder="Ingrese el precio" required>
 
                 <label for="txtstockmin" class="form-label">Stock mínimo:</label>
-                <input type="text" class="form-control" id="txtstockmin" placeholder="Ingrese el stock mínimo">
+                <input type="text" class="form-control" id="txtstockmin" placeholder="Ingrese el stock mínimo" required>
 
                 <label for="txtstockmax" class="form-label">Stock máximo</label>
-                <input type="text" class="form-control" id="txtstockmax" placeholder="Ingrese el stock máximo">
+                <input type="text" class="form-control" id="txtstockmax" placeholder="Ingrese el stock máximo" required>
 
                 <label for="txtidlote" class="form-label">Lote:</label>
                 <select id="txtidlote" class="form-select" aria-label="Default select example">

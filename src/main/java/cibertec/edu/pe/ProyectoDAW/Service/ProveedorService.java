@@ -17,6 +17,13 @@ public class ProveedorService {
         return proveedorRepository.findAll();
     }
 
+    public List<Proveedor> listarProveedorxNombre(String palabraclave){
+        if (palabraclave!= null){
+           return proveedorRepository.findAll(palabraclave);
+        }
+        return proveedorRepository.findAll();
+    }
+
     public ResultadoResponse registrarProveedor(Proveedor proveedor){
         String mensaje = "Proveedor registrado";
         Boolean respuesta = true;

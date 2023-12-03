@@ -20,6 +20,13 @@ public class TrabajadorService {
         return trabajadorRepository.findAll();
     }
 
+    public List<Trabajador> listarTrabajadorxNombre(String palabraclave){
+        if (palabraclave != null){
+            return trabajadorRepository.findAll(palabraclave);
+        }
+        return trabajadorRepository.findAll();
+    }
+
     public ResultadoResponse registrarTrabajador(TrabajadorDto trabajadorDto){
         String mensaje = "Trabajador registrado";
         Boolean respuesta = true;
