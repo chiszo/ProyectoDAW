@@ -3,13 +3,19 @@ package cibertec.edu.pe.ProyectoDAW.Controller.Producto;
 import cibertec.edu.pe.ProyectoDAW.Model.bd.*;
 import cibertec.edu.pe.ProyectoDAW.Model.dto.ProductoDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
+import cibertec.edu.pe.ProyectoDAW.Reportes.ProductoExporterPDF;
 import cibertec.edu.pe.ProyectoDAW.Service.*;
+import com.lowagie.text.DocumentException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.apache.poi.ss.usermodel.DataFormat;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @AllArgsConstructor
@@ -66,5 +72,21 @@ public class ProductoController {
     @ResponseBody
     public List<Estado> listarestado(){
         return estadoService.listar();
+    }
+
+
+    @GetMapping("/exportarPDF")
+    public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+
+        String cabecera  ="Content-Disposition";
+        String valor ="attachment; filename=Productos.pdf";
+
+        response.setHeader(cabecera,valor);
+
+        List<Producto> productos = productoService.listarProductos();
+
+        ProductoExporterPDF exporterPDF = new ProductoExporterPDF(productos);
+        exporterPDF.exportar(response);
     }
 }

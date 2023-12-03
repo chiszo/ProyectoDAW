@@ -17,4 +17,6 @@ public interface ProductoRepository extends JpaRepository<Producto, String> {
             " concat(p.idproducto,p.nombre)" +
             " like %?1%")
     public List<Producto> findAll(String nombre);
+
+    public Producto findByIdproducto(String idproducto);
 }

@@ -83,7 +83,10 @@ public class ProductoService {
         return ResultadoResponse.builder().respuesta(respuesta).mensaje(mensaje).build();
     }
 
-    public Producto obtener(String id){
-        return  productoRepository.findById(id).get();
+    public Producto obtener(String idproducto){
+        if(idproducto!=null){
+            return productoRepository.findByIdproducto(idproducto);
+        }
+        return null;
     }
 }
