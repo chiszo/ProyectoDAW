@@ -3,6 +3,7 @@ package cibertec.edu.pe.ProyectoDAW.Controller.Producto;
 import cibertec.edu.pe.ProyectoDAW.Model.bd.*;
 import cibertec.edu.pe.ProyectoDAW.Model.dto.ProductoDto;
 import cibertec.edu.pe.ProyectoDAW.Model.response.ResultadoResponse;
+import cibertec.edu.pe.ProyectoDAW.Reportes.ProductoExporterExcel;
 import cibertec.edu.pe.ProyectoDAW.Reportes.ProductoExporterPDF;
 import cibertec.edu.pe.ProyectoDAW.Service.*;
 import com.lowagie.text.DocumentException;
@@ -34,6 +35,14 @@ public class ProductoController {
         model.addAttribute("palabraclave",palabraclave);
         model.addAttribute("listadoproductos", productoList);
         return "Producto/list_producto";
+    }
+
+    @GetMapping("/reporte")
+    public String reporte(Model model, @Param("palabraclave") String palabraclave){
+        List<Producto> productoList =  productoService.listarProductosxNombre(palabraclave);
+        model.addAttribute("palabraclave",palabraclave);
+        model.addAttribute("listadoproductos", productoList);
+        return "Producto/report_producto";
     }
 
     @PostMapping("/registrar")
@@ -76,7 +85,7 @@ public class ProductoController {
 
 
     @GetMapping("/exportarPDF")
-    public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+    public void exportarListadoDeProductosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
 
         String cabecera  ="Content-Disposition";
@@ -88,5 +97,20 @@ public class ProductoController {
 
         ProductoExporterPDF exporterPDF = new ProductoExporterPDF(productos);
         exporterPDF.exportar(response);
+    }
+
+    @GetMapping("/exportarExcel")
+    public void exportarListadoDeProductosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/octet-stream");
+
+        String cabecera  ="Content-Disposition";
+        String valor ="attachment; filename=Productos.xlsx";
+
+        response.setHeader(cabecera,valor);
+
+        List<Producto> productos = productoService.listarProductos();
+
+        ProductoExporterExcel exporter = new ProductoExporterExcel(productos);
+        exporter.exportar(response);
     }
 }
