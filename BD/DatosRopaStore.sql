@@ -42,6 +42,8 @@ INSERT INTO PROVEEDOR VALUES
 INSERT INTO TIPOBAJA VALUES(1,'Deteriodo'),(2,'Pérdida')
 ;
 
+INSERT INTO ESTADO VALUES (1, 'disponible'), (2,'no disponible')
+
 INSERT INTO PRODUCTO VALUES
 ('P001',1,'A001','Polo Manga Larga Hombre',77,24.95,20,100,3,1),
 ('P002',1,'A002','Polo Manga Corta Hombre',24,39.92,15,100,3,1),
