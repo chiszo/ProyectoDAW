@@ -16,7 +16,7 @@ import java.util.List;
 public class TrabajadorExporterPDF {
     private List<Trabajador> trabajadorList;
 
-    public TrabajadorExporterPDF(List<Trabajador> productoList) {
+    public TrabajadorExporterPDF(List<Trabajador> trabajadorList) {
         this.trabajadorList = trabajadorList;
     }
 
