@@ -16,7 +16,7 @@ import java.util.List;
 public class TrabajadorExporterPDF {
     private List<Trabajador> trabajadorList;
 
-    public TrabajadorExporterPDF(List<Trabajador> productoList) {
+    public TrabajadorExporterPDF(List<Trabajador> trabajadorList) {
         this.trabajadorList = trabajadorList;
     }
 
@@ -91,8 +91,7 @@ public class TrabajadorExporterPDF {
         PdfPTable table = new PdfPTable(10);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
-        table.setWidths(new float[] {2f,2f,2f,4f,1.5f,2f,1.5f,1.5f,3f,3f});
-        table.setWidthPercentage(110);
+        table.setWidths(new float[]{2f,2f,2f,4f,1.5f,2f,1.5f,1.5f,3f,3f});
 
         escribirCabeceraDeLaTabla(table);
         escribirDatosDeLaTabla(table);
