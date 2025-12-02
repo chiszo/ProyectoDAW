@@ -9,7 +9,17 @@
     <div class="card-header">
         <h2>Mantenimiento de proveedores</h2>
     </div>
-    <br>
+    <form th:action="@{/proveedor/listado-binario}" method="get" class="p-3 d-flex gap-2">
+        <select name="filtro" class="form-select w-auto">
+            <option value="todos">Todos</option>
+            <option value="pares">Solo IDs pares</option>
+            <option value="impares">Solo IDs impares</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    <div class="time-box" style="margin: 5px 0 5px 20px;">
+        Tiempo de búsqueda: <span th:text="${tiempo} + ' ms'">0 ms</span>
+    </div>
     <div class="card-body">
         <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon">Agregar un nuevo Proveedor</i>

@@ -89,4 +89,53 @@ public class ProveedorController {
         ProveedorExporterExcel exporter = new ProveedorExporterExcel(proveedor);
         exporter.exportar(response);
     }
+
+    @GetMapping("/listado-binario")
+    public String listadoBinario(
+            Model model,
+            @RequestParam(required = false) String id,
+            @RequestParam(defaultValue = "todos") String filtro
+    ) {
+        long inicio = System.currentTimeMillis();
+        List<Proveedor> proveedores = proveedorService.listarProveedor();
+        List<Proveedor> filtrados = proveedores.stream().filter(p -> {
+            int numero = Integer.parseInt(p.getIdproveedor().substring(1)); // A001 → 001 → 1
+            if (filtro.equals("pares")) return numero % 2 == 0;
+            if (filtro.equals("impares")) return numero % 2 != 0;
+            return true; // todos
+        }).toList();
+        List<Proveedor> ordenados = filtrados.stream()
+                .sorted((a, b) -> a.getIdproveedor().compareTo(b.getIdproveedor()))
+                .toList();
+        List<Proveedor> resultadoBusqueda = ordenados;
+        if (id != null && !id.isEmpty()) {
+            int left = 0, right = ordenados.size() - 1;
+            Proveedor encontrado = null;
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                Proveedor actual = ordenados.get(mid);
+                int comparacion = actual.getIdproveedor().compareTo(id);
+                if (comparacion == 0) {
+                    encontrado = actual;
+                    break;
+                } else if (comparacion < 0) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            if (encontrado != null) {
+                resultadoBusqueda = List.of(encontrado);
+            } else {
+                resultadoBusqueda = List.of(); // vacío
+            }
+        }
+        long fin = System.currentTimeMillis();
+        long tiempo = fin - inicio;
+        model.addAttribute("listadoproveedores", resultadoBusqueda);
+        model.addAttribute("id", id);
+        model.addAttribute("filtro", filtro);
+        model.addAttribute("tiempo", tiempo);
+        return "Proveedor/list_proveedor";
+    }
 }

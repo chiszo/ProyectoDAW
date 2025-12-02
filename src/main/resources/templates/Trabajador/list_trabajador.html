@@ -10,6 +10,15 @@
         <h2>Mantenimiento de trabajadores</h2>
     </div>
     <br>
+    <form class="form-inline" th:action="@{/trabajador/listado-backtracking}" style="margin:5px;">
+        <div class="form-group col-sm-6 d-flex">
+            <input type="text" class="form-control" name="palabraclave" id="palabraclave" th:value="${palabraclave}" placeholder="Ingrese el ID o nombre de un producto" >
+            <input type="submit" class="btn btn-info mb-2" value="Buscar">
+        </div>
+    </form>
+    <p style="font-weight:bold; margin: 5px 0 5px 20px;">
+        Tiempo de búsqueda: <span th:text="${tiempo} + ' ms'">0 ms</span>
+    </p>
     <div class="card-body">
         <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon">Agregar un nuevo Trabajador</i>

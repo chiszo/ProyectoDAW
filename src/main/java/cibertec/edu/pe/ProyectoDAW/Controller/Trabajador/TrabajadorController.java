@@ -79,14 +79,10 @@ public class TrabajadorController {
     @GetMapping("/exportarPDF")
     public void exportarListadoDeTrabajadorEnPDF(HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
-
         String cabecera = "Content-Disposition";
         String valor = "attachment; filename=Trabajador.pdf";
-
         response.setHeader(cabecera, valor);
-
         List<Trabajador> trabajador = trabajadorService.listarTrabajador();
-
         TrabajadorExporterPDF exporterPDF = new TrabajadorExporterPDF(trabajador);
         exporterPDF.exportar(response);
     }
@@ -94,15 +90,48 @@ public class TrabajadorController {
     @GetMapping("/exportarExcel")
     public void exportarListadoDeTrabajadoresEnExcel(HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/octet-stream");
-
         String cabecera  ="Content-Disposition";
         String valor ="attachment; filename=Trabajador.xlsx";
-
         response.setHeader(cabecera,valor);
-
         List<Trabajador> trabajador = trabajadorService.listarTrabajador();
-
         TrabajadorExporterExcel exporter = new TrabajadorExporterExcel(trabajador);
         exporter.exportar(response);
+    }
+
+    @GetMapping("/listado-backtracking")
+    public String listadoBacktracking(Model model, @Param("palabraclave") String palabraclave){
+        List<Trabajador> lista = trabajadorService.listarTrabajador();
+        long inicio = System.currentTimeMillis();
+        List<Trabajador> resultado = new java.util.ArrayList<>();
+        for (Trabajador t : lista) {
+            if (palabraclave == null || palabraclave.isEmpty()) {
+                resultado.add(t);
+                continue;
+            }
+            if (coincideBacktracking(t.getNombres().toLowerCase(), palabraclave.toLowerCase())) {
+                resultado.add(t);
+            }
+        }
+        long fin = System.currentTimeMillis();
+        long tiempo = fin - inicio;
+        model.addAttribute("palabraclave", palabraclave);
+        model.addAttribute("listadotrabajadores", resultado);
+        model.addAttribute("tiempo", tiempo);
+        return "Trabajador/list_trabajador";
+    }
+    private boolean coincideBacktracking(String texto, String clave) {
+        return backtrack(texto, clave, 0, 0);
+    }
+    private boolean backtrack(String texto, String clave, int i, int j) {
+        if (j == clave.length()) return true;
+        if (i == texto.length()) return false;
+        boolean coincide = false;
+        if (texto.charAt(i) == clave.charAt(j)) {
+            coincide = backtrack(texto, clave, i + 1, j + 1);
+        }
+        if (!coincide) {
+            coincide = backtrack(texto, clave, i + 1, j);
+        }
+        return coincide;
     }
 }

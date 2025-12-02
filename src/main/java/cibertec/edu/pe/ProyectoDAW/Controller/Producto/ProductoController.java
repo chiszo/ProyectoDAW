@@ -31,9 +31,13 @@ public class ProductoController {
 
     @GetMapping("/listado")
     public String listado(Model model, @Param("palabraclave") String palabraclave){
-        List<Producto> productoList =  productoService.listarProductosxNombre(palabraclave);
-        model.addAttribute("palabraclave",palabraclave);
+        long inicio = System.currentTimeMillis();
+        List<Producto> productoList = productoService.listarProductosxNombre(palabraclave);
+        long fin = System.currentTimeMillis();
+        long tiempoBusqueda = fin - inicio;
+        model.addAttribute("palabraclave", palabraclave);
         model.addAttribute("listadoproductos", productoList);
+        model.addAttribute("tiempoBusqueda", tiempoBusqueda);
         return "Producto/list_producto";
     }
 

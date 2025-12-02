@@ -16,6 +16,9 @@
             <input type="submit" class="btn btn-info mb-2" value="Buscar">
         </div>
     </form>
+    <p style="font-weight:bold; margin: 5px 0 5px 20px;">
+        Tiempo de búsqueda: <span th:text="${tiempoBusqueda} + ' ms'">0 ms</span>
+    </p>
     <div class="card-body">
         <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon">Agregar un nuevo Producto</i>
