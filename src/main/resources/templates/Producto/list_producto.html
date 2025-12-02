@@ -10,6 +10,12 @@
         <h2>Mantenimiento de productos</h2>
     </div>
     <br>
+    <form class="form-inline" th:action="@{/producto/listado}" style="margin:5px;">
+        <div class="form-group col-sm-6 d-flex">
+            <input type="text" class="form-control" name="palabraclave" id="palabraclave" th:value="${palabraclave}" placeholder="Ingrese el ID o nombre de un producto" >
+            <input type="submit" class="btn btn-info mb-2" value="Buscar">
+        </div>
+    </form>
     <div class="card-body">
         <button id="btnnuevo" type="button" class="btn btn-info">
             <i class="bi bi-balloon">Agregar un nuevo Producto</i>
@@ -79,6 +85,11 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div>
+        <a th:href="@{/producto/exportarPDF}" class="btn btn-primary">Exportar a PDF</a>
+        <p> </p>
+        <a th:href="@{/producto/exportarExcel}" class="btn btn-success">Exportar a Excel</a>
     </div>
 </div>
 <!-- Modal -->
