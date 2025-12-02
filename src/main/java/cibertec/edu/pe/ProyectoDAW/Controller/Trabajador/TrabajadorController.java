@@ -31,8 +31,13 @@ public class TrabajadorController {
     private AreaService areaService;
     @GetMapping("/listado")
     public String listado(Model model,@Param("palabraclave") String palabraclave){
+        long inicio = System.currentTimeMillis();
+        List<Trabajador> trabajadors = trabajadorService.listarTrabajadorxNombre(palabraclave);
+        long fin = System.currentTimeMillis();
+        long tiempo = fin - inicio;
         model.addAttribute("listadotrabajadores", trabajadorService.listarTrabajadorxNombre(palabraclave));
         model.addAttribute("palabraclave",palabraclave);
+        model.addAttribute("tiempo", tiempo);
         return "Trabajador/list_trabajador";
     }
 

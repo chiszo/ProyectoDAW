@@ -26,9 +26,14 @@ public class ProveedorController {
 
     private ProveedorService proveedorService;
     @GetMapping("/listado")
-    public String listado(Model model,@Param("palabraclave") String palabraclave){
-        model.addAttribute("listadoproveedores", proveedorService.listarProveedorxNombre(palabraclave));
-        model.addAttribute("palabraclave",palabraclave);
+    public String listado(Model model, @Param("palabraclave") String palabraclave) {
+        long inicio = System.currentTimeMillis();
+        List<Proveedor> proveedores = proveedorService.listarProveedorxNombre(palabraclave);
+        long fin = System.currentTimeMillis();
+        long tiempo = fin - inicio;
+        model.addAttribute("listadoproveedores", proveedores);
+        model.addAttribute("palabraclave", palabraclave);
+        model.addAttribute("tiempo", tiempo);  // ⬅️ enviamos el tiempo al HTML
         return "Proveedor/list_proveedor";
     }
 
