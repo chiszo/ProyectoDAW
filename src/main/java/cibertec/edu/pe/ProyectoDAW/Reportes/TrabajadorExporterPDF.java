@@ -91,7 +91,8 @@ public class TrabajadorExporterPDF {
         PdfPTable table = new PdfPTable(10);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
-        table.setWidths(new float[]{2f,2f,2f,4f,1.5f,2f,1.5f,1.5f,3f,3f});
+        table.setWidths(new float[] {2f,2f,2f,4f,1.5f,2f,1.5f,1.5f,3f,3f});
+        table.setWidthPercentage(110);
 
         escribirCabeceraDeLaTabla(table);
         escribirDatosDeLaTabla(table);
